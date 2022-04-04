@@ -1,0 +1,84 @@
+{% extends "recipes/layout.html" %}
+{% load static %}
+
+{% block script %}
+    <script src="{% static 'recipes/recipe.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="alert alert-danger" id="failed" role="alert">
+</div>
+<div id="recipe-head">
+
+    <h1 class="sec-name" id="recipe-name">{{ recipe.title }}</h1>
+    <div id="rating-div">
+        {% if user.is_authenticated and user.username != recipe.user.username %}
+        <div class="rate">
+            <input class="input-star" type="radio" id="star5" name="rate" value="5" />
+            <label for="star5" title="text">5 stars</label>
+            <input class="input-star" type="radio" id="star4" name="rate" value="4" />
+            <label for="star4" title="text">4 stars</label>
+            <input class="input-star" type="radio" id="star3" name="rate" value="3" />
+            <label for="star3" title="text">3 stars</label>
+            <input class="input-star" type="radio" id="star2" name="rate" value="2" />
+            <label for="star2" title="text">2 stars</label>
+            <input class="input-star" type="radio" id="star1" name="rate" value="1" />
+            <label for="star1" title="text">1 star</label>
+        </div>
+        {% endif %}
+        <div id="star-div">
+            <p>Rating {{ rating }}/5</p>
+            <img src="https://affaso.com/wp-content/uploads/2020/06/5-point-stars-png-star-icon-flat-11562958768wpf63hu4tq.png" alt="">
+        </div>
+    </div>
+</div>
+{% if user.is_authenticated and user.username == recipe.user.username %}
+<form action="{% url 'edit-recipe' recipe.id %}">
+    <button class="btn btn-outline-success my-2 my-sm-0">Edit</button>
+</form>
+{% endif %}
+
+<div id="main-recipe-div">
+    <div>
+        Posted by: <h5>{{ recipe.user.username }}</h5>
+        Category: <h5>{{ recipe.category.name }}</h5>
+        {% if recipe.description != "" %}
+            <h2 class="category-head">Description</h2>
+            <p>{{ recipe.description }}</p>
+            <div id="recipe-features">
+                {% if recipe.difficulty != None %}
+                    <p> {{ recipe.difficulty }} </p> 
+                {% endif %}
+                {% if recipe.time != None %}
+                    <p>{{ recipe.time }} Minutes</p> 
+                {% endif %}
+                {% if recipe.cost != None %}
+                    <p>Cost {{ recipe.cost }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    {% if user.is_authenticated %}
+        <div id="button-save">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="save-recipe" type="submit">{{ status }}</button>
+        </div>
+    {% endif %}
+    <img src="{{ recipe.image }}" alt="No Image">  
+</div> 
+<div id="body-recipe-div">
+    <div>
+        <h2 class="category-head">Ingredients</h2>
+        <p>{{ recipe.ingredients }}</p>
+    </div>
+    <div>
+        <h2 class="category-head">Preparation</h2>
+        <p>{{ recipe.preparation }}</p>
+    </div>
+    {% if recipe.tips != "" %}
+    <div>
+        <h2 class="category-head">Tips</h2>
+        <p>{{ recipe.tips }}</p>
+    </div>
+    {% endif%}
+</div>  
+{% endblock %}

@@ -1,0 +1,188 @@
+body {
+    margin: 10px;
+    background-color:#f6f5f3;
+}
+
+#title {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #d59ef5;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.view {
+    padding: 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+#new-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.alert{
+    margin-top: 10px;
+}
+
+.recipes-div {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    height: 300px;
+    display: flex;
+    justify-content: left;
+    margin-bottom: 40px; 
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    
+}
+
+.recipes-div::-webkit-scrollbar {
+    display: none;
+}
+
+.category-head {
+    margin-top: 15px;
+    text-transform: uppercase;
+    color: #171c2a;
+    font-size: 1.30rem;
+    font-weight: 600;
+    letter-spacing: .22px;
+    line-height: 1em;
+    padding: 0;
+    position: relative;
+}
+
+.category-head::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: #d59ef5;
+    margin-top: 10px;
+}
+
+.single-recipe {
+    background-color: white;
+    border-radius: 3px;
+    text-align: center;
+    width: 300px;
+    margin: 10px;
+    box-shadow: 0 5px 10px rgb(45 34 60 / 12%);
+}
+
+.single-recipe:hover {
+    cursor: pointer;
+    box-shadow: 0 1px 8px gray;
+}
+
+.image-index {
+    width: 300px;
+    height: 240px;
+    margin-bottom: 5px;
+    box-shadow: 0 5px 10px rgb(45 34 60 / 12%);
+}
+
+#main-recipe-div {
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#main-recipe-div > img {
+    width: 500px;
+    box-shadow: 0 5px 10px rgb(45 34 60 / 12%);
+    border-radius: 3px;
+}
+
+#button-save {
+    padding-right: 10px;
+}
+
+#body-recipe-div {
+    margin: 10px;
+    padding: 10px;
+}
+
+#recipe-features{
+    display: flex;
+    justify-content: space-around;
+}
+
+#recipe-features > p {
+    background-color: #f6f5f3;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.sec-name {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #d59ef5;
+    font-weight: bolder;
+}
+
+#recipe-head, #star-div {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+#star-div {
+    margin-left: 35px;
+    float:left; 
+    clear: left;
+}
+#star-div > p {
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+#star-div > img {
+    margin-top: 10px;
+    margin-left: 2px;
+    height: 20px;
+}
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}

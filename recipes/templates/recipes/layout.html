@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title id="header">{% block title %}Nana's Recipes{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'recipes/styles.css' %}">
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            let inputElt = document.getElementById('search-bar');
+            let btn = document.getElementById('search-recipe');
+
+            inputElt.addEventListener("input", function(){
+            btn.disabled = (this.value === '');
+            })
+          })
+        </script>
+        {% block script %}
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" id="title">Nana's Recipes</a>          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'saved-recipes' %}">Saved Recipes</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'my-recipes' %}">My Recipes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'new-recipe' %}">New Recipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out | {{ user }}</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+              </ul>
+              <form id="search-form" class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET">
+                <input class="form-control mr-sm-2" id="search-bar" type="search" placeholder="Search Recipes" aria-label="Search" name="q">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-recipe" disabled>Search</button>
+              </form>
+            </div>
+            <hr>
+          </nav>
+          <div class="view">
+            {% block body %}
+            {% endblock %}
+          </div>
+    </body>
+</html>

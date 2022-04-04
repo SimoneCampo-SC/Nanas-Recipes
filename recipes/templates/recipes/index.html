@@ -1,0 +1,23 @@
+{% extends "recipes/layout.html" %}
+
+{% block body %}
+    <h1 class="sec-name" id="mode">{{ type }}</h1>
+    <hr>
+    {% if message %}
+        <h1 class="sec-name" style="text-align: center;">{{ message }}</h1>
+    {% endif %}
+    
+    {% for category in categories %}
+      <p class="category-head">{{ category.name }}</p>
+      <div class="recipes-div">
+          {% for recipe in recipes %}
+              {% if recipe.category.id == category.id %}
+                  <a class="single-recipe" href="{% url 'recipe-page' recipe.id %}">
+                      <img class="image-index" src="{{ recipe.image }}" alt="No Image">
+                      <h5 id="recipe-name" style="color: black;">{{ recipe.title }}</h5>
+                  </a>
+              {% endif %}
+          {% endfor %}
+      </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "recipes/layout.html" %}
+{% load static %}
+
+{% block script %}
+    <script src="{% static 'recipes/new.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<form id="recipe-form">
+    <div id="new-div">
+        <h1 class="sec-name">{{ title }}</h1>
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Post"/>
+    </div>
+    <div class="alert alert-success" id="success" role="alert">
+    </div>
+    <div class="alert alert-danger" id="failed" role="alert">
+    </div>
+
+    {% if recipe %}
+      <div class="form-group">
+        <label> <strong>ID</strong></label>
+        <textarea style="height: 40px;" type="text" class="form-control" id="recipe-id" disabled>{{ recipe.id }}</textarea>
+      </div>
+    {% endif %}
+
+    <div class="form-group">
+      <label>Name*</label>
+      <input type="text" class="form-control" id="name" maxlength="32" placeholder="Max 32" value="{{ recipe.title }}" required autofocus>
+    </div>
+
+    <div class="form-group">
+        <label>URL Image</label>
+        <input type="url" class="form-control" id="image" value="{{ recipe.image }}">
+    </div>
+
+    <div class="form-group">
+        <label>Category*</label>
+        <select class="form-control" id="category">
+            {% for category in categories %}
+                {% if recipe.category.name == category.name %}
+                    <option selected="selected">{{ category.name }}</option>
+                {% else %}
+                    <option>{{ category.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Difficulty*</label>
+        <select class="form-control" id="difficulty">
+          {% if recipe.difficulty == "Easy" %}      
+            <option selected="selected">Easy</option>
+          {% else %}
+            <option>Easy</option>
+          {% endif %}
+
+          {% if recipe.difficulty == "Medium" %}
+            <option selected="selected">Medium</option>
+          {% else %}
+            <option>Medium</option>
+          {% endif %}
+
+          {% if recipe.difficulty == "Difficult" %}
+            <option selected="selected">Difficult</option>
+          {% else %}
+            <option>Difficult</option>
+          {% endif %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Cost</label>
+        <select class="form-control" id="cost">
+          {% if recipe.cost == "Low" %}      
+            <option selected="selected">Low</option>
+          {% else %}
+          <option>Low</option>
+          {% endif %}
+
+          {% if recipe.cost == "Medium" %}
+            <option selected="selected">Medium</option>
+          {% else %}
+            <option>Medium</option>
+          {% endif %}
+
+          {% if recipe.cost == "High" %}
+            <option selected="selected">High</option>
+          {% else %}
+          <option>High</option>
+          {% endif %}
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label>Prep. Time*</label>
+        <input type="number" class="form-control" id="time" placeholder="Minutes" value="{{ recipe.time }}" required>
+      </div>
+
+    <div class="form-group">
+        <label>Ingredients*</label>
+        <textarea class="form-control" id="ingredients" rows="6" maxlength="300" placeholder="Max 300" required>{{ recipe.ingredients }}</textarea>
+    </div>
+    <div class="form-group">
+        <label>Description*</label>
+        <textarea class="form-control" id="description" rows="6" maxlength="500" placeholder="Max 500" required>{{ recipe.description }}</textarea>
+    </div>
+    <div class="form-group">
+        <label>Preparation*</label>
+        <textarea class="form-control" id="preparation" rows="8" maxlength="1000" placeholder="Max 1000" required>{{ recipe.preparation }}</textarea>
+    </div>
+    <div class="form-group">
+        <label>Tips</label>
+        <textarea class="form-control" id="tips" rows="3" maxlength="200" placeholder="Max 200">{{ recipe.tips }}</textarea>
+    </div>
+</form>
+{% endblock %}
