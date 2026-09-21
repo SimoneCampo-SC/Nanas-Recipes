@@ -37,5 +37,15 @@ The project also includes validation around recipe creation and editing, ownersh
 
 From the repository root:
 
-```bash
+```
 python3 manage.py runserver
+```
+
+Then open the local development URL provided by Django and navigate to:
+
+```
+/nanarecipes/
+```
+## Project context
+
+This is an earlier full-stack project preserved as part of my public engineering portfolio. It demonstrates my work with backend development, relational data modelling, frontend interaction and end-to-end web application design.
